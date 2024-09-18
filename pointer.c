@@ -111,8 +111,12 @@ int intSize() {
   int *intPtr1;
   int *intPtr2;
   // Write code to compute size of an integer.
+  intPtr1 = intArray;
+  intPtr2 = intArray +10;
+  long long Ans =(long long)intPtr2 - (long long)intPtr1;
+  return Ans/10;
 
-  return 2;
+
 }
 
 /*
@@ -134,8 +138,12 @@ int doubleSize() {
   double *doubPtr1;
   double *doubPtr2;
   // Write code to compute size of a double.
+  doubPtr1 = doubArray;
+  doubPtr2 = doubArray + 10;
+  long long Ans =(long long)doubPtr2 - (long long)doubPtr1;
 
-  return 2;
+  return Ans/10;
+
 }
 
 /*
@@ -157,8 +165,10 @@ int pointerSize() {
   double **ptrPtr1;
   double **ptrPtr2;
   // Write code to compute size of a pointer.
-
-  return 2;
+  ptrPtr1 = ptrArray;
+  ptrPtr2 = ptrArray + 10;
+  long long Ans =(long long)ptrPtr2 - (long long)ptrPtr1;
+  return Ans/10;
 }
 
 /*
@@ -178,6 +188,9 @@ int pointerSize() {
  */
 void swapInts(int *ptr1, int *ptr2) {
   // Your code here
+  *ptr1 += *ptr2;
+  *ptr2 = *ptr1 - *ptr2;
+  *ptr1 -= *ptr2;
 }
 
 /*
@@ -200,7 +213,11 @@ int changeValue() {
   int *intPtr1 = intArray;
   // Remember not to use constants greater than 255.
   // Remember to use * to dereference. You cannot use '[<index>]' syntax.
-
+  
+  *(intPtr1 + 5) = 147;
+  *(intPtr1 + 5) =*(intPtr1 + 5)<<1;
+  *(intPtr1 + 5) += 1;
+  
   return intArray[5];
 }
 
@@ -223,7 +240,10 @@ int changeValue() {
  */
 int withinSameBlock(int *ptr1, int *ptr2) {
   // Your code here
-  return 2;
+  if ((long long)ptr1>>6 == (long long)ptr2>>6)
+    return 1;
+  else
+    return 0;
 }
 
 /*
@@ -247,7 +267,6 @@ int withinSameBlock(int *ptr1, int *ptr2) {
  */
 int withinArray(int *intArray, int size, int *ptr) {
   // Your code here
-  return 2;
 }
 
 /*
