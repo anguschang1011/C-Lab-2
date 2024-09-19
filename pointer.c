@@ -186,12 +186,14 @@ int pointerSize() {
  *   Binary integer operators: &, &&, |, ||, <, >, <<, >>, ==, !=, ^, /, %
  *   Unary integer operators: ~, -
  */
-void swapInts(int *ptr1, int *ptr2) {
+void swapInts(int *a, int *b) {
   // Your code here
-  *ptr1 += *ptr2;
-  *ptr2 = *ptr1 - *ptr2;
-  *ptr1 -= *ptr2;
+  int temp;
+  temp = *a;
+  *a = *b;
+  *b = temp;
 }
+
 
 /*
  * Modify intArray[5] to be the value 295 using only intArray and pointer
@@ -267,7 +269,16 @@ int withinSameBlock(int *ptr1, int *ptr2) {
  */
 int withinArray(int *intArray, int size, int *ptr) {
   // Your code here
+  int diff = ptr - intArray;
+  //x>>31 will give -1 if x <0  and 0 if x >=0
+  if(diff>>31)
+    return 0;
+  diff-=size;
+  if(diff>>31)
+    return 1;
+  return 0;
 }
+
 
 /*
  * In C characters are are terminated by the null character ('\0')
@@ -288,7 +299,15 @@ int withinArray(int *intArray, int size, int *ptr) {
  */
 int stringLength(char *s) {
   // Your code here
-  return 2;
+  int len = 0;
+    
+    
+  while (*(s + len) != '\0') {
+      len++;  
+  }
+    
+  return len;
+
 }
 
 /*
@@ -317,6 +336,12 @@ int stringLength(char *s) {
 int endianExperiment(int *ptr) {
   char *bytePtr;
   // Your code here
+  bytePtr = (char *)ptr;
+  *bytePtr = 0x7f;
+  *(bytePtr + 1) = 0x81;
+  *(bytePtr + 2) = 0x04;
+  *(bytePtr + 3) = 0x00;
+
   return *ptr;
 }
 
@@ -380,6 +405,12 @@ int smallest_idx(int *arr, int len) {
   int smallest = arr[0];
 
   // TODO: implement me using a for loop.
+  for (i = 1; i < len; i++) {
+          if (*(arr + i) < smallest) { 
+              smallest = *(arr + i);
+              smallest_i = i;
+          }
+      }
 
   return smallest_i;
 }
